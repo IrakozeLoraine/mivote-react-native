@@ -11,11 +11,10 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
-  const [dob, setDob] = useState(new Date());
   const { navigate } = useNavigation();
 
   const submitForm = () => {
-    navigate('Home');
+    navigate('Login');
   };
 
   return (

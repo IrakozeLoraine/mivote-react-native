@@ -1,7 +1,9 @@
 import React from 'react';
+import { FlatList, SafeAreaView } from 'react-native';
+import ListItem from '../components/ListItem';
 
-export default function Polls() {
-  const polls = [
+export default function Candidates() {
+  const candidates = [
     {
       title: 'John Doe',
       image: require('../assets/img/person1.png'),
@@ -35,12 +37,12 @@ export default function Polls() {
   ];
 
   const renderItem = ({ item, index }) => (
-    <ListItem key={`poll#${index}`} items={item} />
+    <ListItem key={`candidate#${index}`} items={item} />
   );
 
   return (
     <SafeAreaView>
-      <FlatList data={polls} renderItem={renderItem} />
+      <FlatList data={candidates} renderItem={renderItem} />
     </SafeAreaView>
   );
 }

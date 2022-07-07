@@ -1,10 +1,18 @@
-import { View, Text, SafeAreaView, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Image,
+  StyleSheet,
+  ToastAndroid,
+} from 'react-native';
 import React, { useState } from 'react';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import Emoji from 'react-native-emoji';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Login() {
   const [phone, setPhone] = useState('');
@@ -12,7 +20,25 @@ export default function Login() {
   const { navigate } = useNavigation();
 
   const submitForm = () => {
-    navigate('Home');
+    signin({
+      phone,
+      password,
+    })
+      .then(async (res) => {
+        try {
+          await AsyncStorage.setItem('user', JSON.stringify(res.data)),
+            ToastAndroid.show(
+              `Welcome back, ${res.data.names}`,
+              ToastAndroid.SHORT
+            );
+          setPhone('');
+          setPassword('');
+          navigate('Root');
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .catch((error) => console.log(error.response));
   };
 
   return (
