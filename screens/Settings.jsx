@@ -1,7 +1,7 @@
-import { View, Text, Pressable, Modal } from 'react-native';
+import { View, Text, Pressable, Modal, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 
-export default function Settings() {
+export default function Settings({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
